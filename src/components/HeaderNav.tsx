@@ -3,8 +3,19 @@ import { Volume2, VolumeX, Radio, ShieldAlert, Cpu } from 'lucide-react';
 import { soundEngine } from '../utils/audio';
 
 interface HeaderNavProps {
-  currentScene: 'scene-a' | 'scene-b' | 'scene-c' | 'scene-mission-ready';
-  onNavigateScene?: (scene: 'scene-a' | 'scene-b' | 'scene-c') => void;
+  currentScene:
+    | 'scene-a'
+    | 'scene-b'
+    | 'scene-c'
+    | 'scene-mission-ready'
+    | 'scene-docking'
+    | 'scene-exploration'
+    | 'scene-evidence-review'
+    | 'scene-signal-analysis'
+    | 'scene-ai-reveal'
+    | 'scene-final-transmission'
+    | 'scene-ending';
+  onNavigateScene?: (scene: 'scene-a' | 'scene-b' | 'scene-c' | 'scene-mission-ready') => void;
   onOpenDiagnostics: () => void;
 }
 
@@ -45,6 +56,20 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
         return { label: 'PHASE 03: MISSION INITIATION', color: 'text-sky-400 border-sky-500/40 bg-sky-950/30' };
       case 'scene-mission-ready':
         return { label: 'PHASE 04: MISSION READY', color: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/30' };
+      case 'scene-docking':
+        return { label: 'PHASE 05: DOCKING SEQUENCE', color: 'text-amber-400 border-amber-500/40 bg-amber-950/30' };
+      case 'scene-exploration':
+        return { label: 'PHASE 05: SHIP EXPLORATION', color: 'text-cyan-400 border-cyan-500/40 bg-cyan-950/30' };
+      case 'scene-evidence-review':
+        return { label: 'PHASE 06: EVIDENCE ARCHIVE', color: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/30' };
+      case 'scene-signal-analysis':
+        return { label: 'PHASE 07: SIGNAL ANALYSIS', color: 'text-cyan-400 border-cyan-500/40 bg-cyan-950/30' };
+      case 'scene-ai-reveal':
+        return { label: 'PHASE 08: AI CORE ACCESS', color: 'text-amber-400 border-amber-500/40 bg-amber-950/30' };
+      case 'scene-final-transmission':
+        return { label: 'PHASE 09: FINAL TRANSMISSION', color: 'text-red-400 border-red-500/40 bg-red-950/30' };
+      case 'scene-ending':
+        return { label: 'MISSION COMPLETE: ARCHIVE SECURED', color: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/30' };
     }
   };
 

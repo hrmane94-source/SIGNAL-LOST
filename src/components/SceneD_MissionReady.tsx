@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, RotateCcw, Cpu, Radio, ShieldCheck, Terminal, Compass, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, RotateCcw, Cpu, Radio, ShieldCheck, Terminal, Compass, Crosshair, ChevronRight } from 'lucide-react';
 import { SignalWaveform } from './SignalWaveform';
 import { soundEngine } from '../utils/audio';
 
 interface SceneDMissionReadyProps {
   onRestart: () => void;
   onOpenDiagnostics: () => void;
+  onInitiateBoarding: () => void;
 }
 
 export const SceneD_MissionReady: React.FC<SceneDMissionReadyProps> = ({
   onRestart,
   onOpenDiagnostics,
+  onInitiateBoarding,
 }) => {
   const [distanceKm, setDistanceKm] = useState(12480);
   const [relativeVelocity] = useState(42.8);
@@ -145,16 +147,32 @@ export const SceneD_MissionReady: React.FC<SceneDMissionReadyProps> = ({
             </div>
           </div>
 
-          {/* Milestone 02 Hand-off Briefing Notice */}
-          <div className="bg-slate-900/60 border border-cyan-800/40 rounded-xl p-5 font-mono text-xs text-slate-300 space-y-2">
-            <div className="flex items-center gap-2 text-amber-400 font-semibold">
-              <AlertTriangle className="w-4 h-4" />
-              <span>NEXT OPERATIONAL PHASE // MILESTONE 02 PREPARATION</span>
+          {/* Milestone 02 Boarding Initiation */}
+          <div className="bg-slate-900/70 border border-cyan-500/40 rounded-xl p-5 font-mono text-xs text-slate-300 space-y-4 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+            <div className="flex items-center justify-between border-b border-cyan-950 pb-2">
+              <span className="flex items-center gap-2 text-cyan-400 font-bold uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                ORPHEUS-09 BOARDING VECTOR: CLEARED
+              </span>
+              <span className="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
+                AIRLOCK ENGAGED
+              </span>
             </div>
-            <p className="text-slate-400 leading-relaxed">
-              Vessel docking corridors, atmospheric pressure equalization, and interior chamber exploration systems are currently in pre-dock staging. 
-              The investigator interface has achieved full mission authorization.
+            <p className="text-slate-300 leading-relaxed text-xs">
+              Vanguard craft <span className="text-white font-semibold">Astraea-IV</span> has synchronized trajectory with the research vessel. Airlock alignment and quarantine seals are primed.
             </p>
+            <button
+              onClick={() => {
+                soundEngine.playClick();
+                onInitiateBoarding();
+              }}
+              type="button"
+              className="w-full flex items-center justify-center gap-3 py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-600 via-sky-500 to-cyan-500 hover:from-cyan-500 hover:to-sky-400 text-slate-950 font-bold text-sm tracking-wider uppercase transition shadow-[0_0_25px_rgba(0,240,255,0.4)] hover:scale-[1.02] active:scale-[0.99] cursor-pointer"
+            >
+              <Crosshair className="w-5 h-5 text-slate-950" />
+              <span>INITIATE BOARDING SEQUENCE</span>
+              <ChevronRight className="w-5 h-5 text-slate-950" />
+            </button>
           </div>
 
         </div>
